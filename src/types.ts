@@ -1,4 +1,5 @@
 import { ActorRef } from "xstate";
+import { PlayerContext } from "./machines/player-machine";
 
 type XCoordType = number;
 type YCoordType = number;
@@ -63,7 +64,7 @@ export type GameState = {
 
 // Player machine
 export interface PlayerStateType {
-  context: null;
+  context: PlayerContext;
   value: "alive" | "dead";
 }
 
