@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { GameEventType, GameState } from "../types";
+import { GameEventType, GameState } from "./game-machine-types";
 import { playerMachine } from "./player-machine";
 
 export const gameMachine = createMachine<null, GameEventType, GameState>({

@@ -1,4 +1,4 @@
-import { GameEventType } from "../types";
+import { GameEventType } from "../machines/game-machine-types";
 
 export const fastForwardToLevelOneEvents: GameEventType[] = [
   { type: "START_BUTTON_CLICKED" },
