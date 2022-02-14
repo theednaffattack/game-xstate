@@ -12,6 +12,7 @@ import { GameOver } from "./game-over-screen";
 import { Grid } from "./grid";
 import { HomeScreen } from "./home-screen";
 import { LevelBackgroundImage } from "./level-background-image";
+import Player from "./player";
 
 type Props = {
   fastForwardEvents?: GameEventType[];
@@ -23,6 +24,7 @@ const lightText = css`
 
 export function Game({ fastForwardEvents }: Props) {
   const [state, send] = useMachine(gameMachine);
+  const { playerActor } = state.children;
 
   useEffect(() => {
     if (fastForwardEvents) {
@@ -55,6 +57,7 @@ export function Game({ fastForwardEvents }: Props) {
         <>
           <LevelBackgroundImage src={levelOneBackground} />
           <Grid />
+          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
           <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
             CURR: One, NEXT: Two
           </Button>
@@ -73,6 +76,7 @@ export function Game({ fastForwardEvents }: Props) {
         <>
           <LevelBackgroundImage src={levelTwoBackground} />
           <Grid />
+          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
           <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
             CURR: Two, NEXT: Three
           </Button>
@@ -92,6 +96,7 @@ export function Game({ fastForwardEvents }: Props) {
           <LevelBackgroundImage src={levelThreeBackground} />
           <Grid />
 
+          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
           <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
             Uhhhhhh
           </Button>
