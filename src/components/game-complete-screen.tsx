@@ -1,6 +1,5 @@
 import { css } from "@linaria/core";
 import treasure from "../game-assets/images/treasure.png";
-import { gridCoordsList } from "../lib/util/grid-coords-list";
 import { Button } from "./button";
 import { globals } from "./global_css";
 import { Heading } from "./heading";
