@@ -3,11 +3,14 @@ body {
   height: 100%;
 }
 
+@font-face {
+  font-family: "VCR_OSD_MONO", "mono-space";
+  src: url(./game-assets/fonts/VCR_OSD_MONO.ttf) format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  /* font-family: "VCR_OSD_MONO", "mono-space"; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

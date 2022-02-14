@@ -1,6 +1,35 @@
+/* Root psuedo-class */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class */
+
+/* Fluid Typography */
+
+:root {
+  --dev-outline: 3px orange dashed;
+  --color: hsl(0, 0%, 0%, 1);
+  --focus: hsla(207, 90%, 54%, 1);
+  --black: #000;
+  --white: #fff;
+
+  --space-size: 4;
+
+  --base-font-size: 12px;
+  --fluid-typography-ratio: 0.9;
+
+  --rem: calc(var(--base-font-size) + var(--fluid-typography-ratio) * 1vw);
+
+  font-size: var(--rem);
+}
+
+/* React root element */
 #root {
-  display: grid;
   height: 100%;
 
-  grid-template-rows: 30px 1fr 80px;
+  /* grid-template-rows: 30px 1fr 80px; */
+}
+
+main {
+  outline: var(--dev-outline, 2px limegreen dashed);
+
+  display: grid;
+  height: 100%;
 }
