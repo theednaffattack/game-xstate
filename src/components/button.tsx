@@ -11,6 +11,16 @@ const style = css`
   outline: 2px var(--white) solid;
 `;
 
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className={style}>{children}</button>;
+export function Button({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  return (
+    <button className={style} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
