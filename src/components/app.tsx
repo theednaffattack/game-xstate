@@ -4,9 +4,12 @@ import { globals } from "./global_css";
 import { Heading } from "./heading";
 import { ImageSizeType } from "./image";
 import { MenuScreen } from "./menu-screen";
+import thiefGif from "../game-assets/images/thief.gif";
 import { Image } from "./image";
 import { GRID_SQUARE_SIZE } from "../lib/constants";
 import { LevelBackgroundImage } from "./level-background-image";
+
+import level1Background from "../game-assets/images/level1Background.png";
 
 const styles = css`
   background-color: var(--black);
@@ -41,10 +44,10 @@ export function App() {
       <MenuScreen>
         <Heading>Heading</Heading>
         <p>
-          <Image alt="Thief" size={ImageSizeType.Large} />
-          <Image alt="Thief" size={ImageSizeType.Medium} />
-          <Image alt="Thief" size={ImageSizeType.Small} />
-          <LevelBackgroundImage alt="Level 1 dungeon" />
+          <Image alt="Thief" size={ImageSizeType.Large} src={thiefGif} />
+          <Image alt="Thief" size={ImageSizeType.Medium} src={thiefGif} />
+          <Image alt="Thief" size={ImageSizeType.Small} src={thiefGif} />
+          <LevelBackgroundImage alt="Level 1 dungeon" src={level1Background} />
         </p>
         <Button>Start Game</Button>
         {/* <Button>Game Over</Button> */}
