@@ -4,7 +4,7 @@ import { globals } from "./global_css";
 import { Heading } from "./heading";
 import { ImageSizeType } from "./image";
 import { MenuScreen } from "./menu-screen";
-import { Image } from "./Image.1";
+import { Image } from "./image";
 import { GRID_SQUARE_SIZE } from "../lib/constants";
 
 const styles = css`
