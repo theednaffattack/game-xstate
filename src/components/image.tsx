@@ -7,15 +7,20 @@ export enum ImageSizeType {
   Large = "Large",
 }
 
-export function Image({ size }: { size?: ImageSizeType }) {
+interface ImageProps {
+  alt?: string;
+  size?: ImageSizeType;
+}
+
+export function Image({ alt, size }: ImageProps) {
   if (size === ImageSizeType.Large) {
-    return <img src={thiefGif} className={`large ${large}`} />;
+    return <img alt={alt} src={thiefGif} className={`large ${large}`} />;
   }
   if (size === ImageSizeType.Medium) {
-    return <img src={thiefGif} className={`medium ${medium}`} />;
+    return <img alt={alt} src={thiefGif} className={`medium ${medium}`} />;
   }
   if (size === ImageSizeType.Small) {
-    return <img src={thiefGif} className={`small ${small}`} />;
+    return <img alt={alt} src={thiefGif} className={`small ${small}`} />;
   }
-  return <img src={thiefGif} className={`medium ${medium}`} />;
+  return <img alt={alt} src={thiefGif} className={`medium ${medium}`} />;
 }
