@@ -10,4 +10,26 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+  <script>
+    // alert("VCR_OSD_MONO? " + document.fonts.check("VCR_OSD_MONO")); // false
+
+    document.fonts.ready
+      .then(function () {
+        console.log("All fonts in use by visible text have loaded.");
+        // alert("VCR_OSD_MONO? " + document.fonts.check("VCR_OSD_MONO")); // true
+        console.log("VCR_OSD_MONO? " + document.fonts.check("VCR_OSD_MONO")); // true
+      })
+      .catch((err) => {
+        console.error(`Unknown Font Check Error!!!\n${err}`);
+      });
+
+    document.fonts.onloadingdone = function (fontFaceSetEvent) {
+      console.log(
+        "onloadingdone we have " +
+          fontFaceSetEvent.fontfaces.length +
+          " font faces loaded"
+      );
+      console.table(fontFaceSetEvent.fontfaces);
+    };
+  </script>
 </html>
