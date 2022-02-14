@@ -1,9 +1,10 @@
 import { css } from "@linaria/core";
+import { GRID_SQUARE_SIZE } from "../lib/constants";
 
 export const menuScreenStyles = css`
   background-color: var(--black);
 
-  outline: var(--dev-outline, 2px limegreen dashed);
+  /* outline: var(--dev-outline, 2px limegreen dashed); */
 
   display: grid;
   height: 100%;
@@ -23,6 +24,6 @@ export const mediumImg = css`
 `;
 
 export const smallImg = css`
-  width: var(--small-img);
+  width: ${GRID_SQUARE_SIZE};
   object-fit: contain;
 `;
