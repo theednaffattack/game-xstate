@@ -5,7 +5,7 @@ import levelOneBackground from "../game-assets/images/level1Background.png";
 import levelTwoBackground from "../game-assets/images/level2Background.png";
 import levelThreeBackground from "../game-assets/images/level3Background.png";
 import { gameMachine } from "../machines/game-machine";
-import { GameEventType } from "../types";
+import { GameEventType } from "../machines/game-machine-types";
 import { Button } from "./button";
 import { GameCompleteScreen } from "./game-complete-screen";
 import { GameOver } from "./game-over-screen";
