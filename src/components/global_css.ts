@@ -32,6 +32,8 @@ export const globals = css`
       --large-img: 8em;
       --medium-img: 6em;
       --small-img: 3em;
+
+      --white-border: 2px white solid;
     }
 
     /* React root element */
