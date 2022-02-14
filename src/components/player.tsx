@@ -2,11 +2,11 @@ import { useActor } from "@xstate/react";
 import React from "react";
 import thief from "../game-assets/images/thief.gif";
 import { coordsToPosition } from "../lib/util/coords-to-position";
-import { PlayerActor } from "../types";
+import { PlayerActorType } from "../machines/player-machine-types";
 import { Image, ImageSizeType } from "./image";
 
 interface PlayerProps {
-  actor: PlayerActor;
+  actor: PlayerActorType;
 }
 
 function Player({ actor }: PlayerProps) {
