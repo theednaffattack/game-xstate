@@ -1,3 +1,5 @@
+import { ActorRef } from "xstate";
+
 type XCoordType = number;
 type YCoordType = number;
 
@@ -58,3 +60,11 @@ export type GameState = {
     | "gameOver"
     | "gameComplete";
 };
+
+// Player machine
+export interface PlayerStateType {
+  context: null;
+  value: "alive" | "dead";
+}
+
+export type PlayerActor = ActorRef<any, PlayerStateType>;

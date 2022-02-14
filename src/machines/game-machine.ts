@@ -1,5 +1,6 @@
 import { createMachine } from "xstate";
 import { GameEventType, GameState } from "../types";
+import { playerMachine } from "./player-machine";
 
 export const gameMachine = createMachine<null, GameEventType, GameState>({
   id: "game",
@@ -11,6 +12,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>({
       },
     },
     playing: {
+      invoke: { id: "playerActor", src: playerMachine },
       on: {
         PLAYER_DIED: "gameOver",
         PLAYER_GOT_TREASURE: "gameComplete",
