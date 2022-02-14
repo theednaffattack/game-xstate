@@ -12,9 +12,9 @@ export const playerMachine = createMachine<PlayerContext, any, PlayerStateType>(
       coords: PLAYER_STARTING_COORDS as CoordsType,
     },
     id: "player",
-    initial: "live",
+    initial: "alive",
     states: {
-      live: {},
+      alive: {},
       dead: {},
     },
   }
