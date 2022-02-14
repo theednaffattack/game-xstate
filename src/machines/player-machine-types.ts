@@ -1,5 +1,5 @@
 import { ActorRef } from "xstate";
-import { PlayerContext } from "./player-machine";
+import { PlayerContextType } from "./player-machine";
 
 // Player machine
 export enum DirectionType {
@@ -10,7 +10,7 @@ export enum DirectionType {
 }
 
 export interface PlayerStateType {
-  context: PlayerContext;
+  context: PlayerContextType;
   value: "alive" | "dead";
 }
 

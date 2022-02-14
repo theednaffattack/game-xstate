@@ -4,7 +4,7 @@ import { PLAYER_STARTING_COORDS } from "../lib/constants";
 import { CoordsType } from "../types";
 import { PlayerEventType, PlayerStateType } from "./player-machine-types";
 
-export interface PlayerContext {
+export interface PlayerContextType {
   coords: CoordsType;
 }
 
