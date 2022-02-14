@@ -10,8 +10,6 @@ import { MenuScreen } from "./menu-screen";
 const styles = css`
   background-color: var(--black);
 
-  outline: var(--dev-outline, 2px limegreen dashed);
-
   display: grid;
   height: 100%;
 
@@ -43,11 +41,10 @@ interface HomeScreenProps {
 }
 
 export function HomeScreen({ onStartGameButtonClick }: HomeScreenProps) {
-  console.log(gridCoordsList);
   return (
     <div className={`${globals} ${styles}`}>
       <MenuScreen>
-        <Heading>Heading</Heading>
+        <Heading>Pixel Thief</Heading>
         <Image alt="Thief" size={ImageSizeType.Large} src={thiefGif} />
         <Button onClick={onStartGameButtonClick}>Start Game</Button>
       </MenuScreen>

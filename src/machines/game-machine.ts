@@ -3,6 +3,7 @@ import { GameEventType, GameState } from "../types";
 
 export const gameMachine = createMachine<null, GameEventType, GameState>({
   id: "game",
+  initial: "home",
   states: {
     home: {
       on: {
@@ -13,6 +14,24 @@ export const gameMachine = createMachine<null, GameEventType, GameState>({
       on: {
         PLAYER_DIED: "gameOver",
         PLAYER_GOT_TREASURE: "gameComplete",
+      },
+      initial: "level1",
+      states: {
+        level1: {
+          on: {
+            PLAYER_WALKED_THROUGH_DOOR: "level2",
+          },
+        },
+        level2: {
+          on: {
+            PLAYER_WALKED_THROUGH_DOOR: "level3",
+          },
+        },
+        level3: {
+          on: {
+            PLAYER_GOT_TREASURE: "",
+          },
+        },
       },
     },
     gameOver: {

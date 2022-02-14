@@ -15,7 +15,7 @@ const gridStyles = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: var(--white-border);
+  /* border: var(--white-border); */
 `;
 
 type GridProps = { children?: React.ReactNode };
@@ -52,19 +52,13 @@ export function GridSquare({ x, y }: GridSquareProps) {
       style={{
         position: "absolute",
         width: `${GRID_SQUARE_SIZE}px`,
-        height: `${GRID_SQUARE_SIZE}px}`,
+        height: `${GRID_SQUARE_SIZE}px`,
         top: `${x * GRID_SQUARE_SIZE}px`,
         left: `${y * GRID_SQUARE_SIZE}px`,
-        border: "2px solid white",
-        padding: 0,
+        // border: "1px solid white",
+        // padding: 0,
       }}
-    >
-      <div className={tabNumbers}>
-        <p>
-          {x},{y}
-        </p>
-      </div>
-    </div>
+    ></div>
   );
 }
 

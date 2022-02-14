@@ -39,7 +39,6 @@ interface GameOverProps {
 }
 
 export function GameCompleteScreen({ onGoHomeButtonClick }: GameOverProps) {
-  console.log(gridCoordsList);
   return (
     <div className={`${globals} ${styles}`}>
       <MenuScreen>

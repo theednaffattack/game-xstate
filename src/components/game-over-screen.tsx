@@ -39,13 +39,18 @@ interface GameOverProps {
 }
 
 export function GameOver({ onRestartButtonClick }: GameOverProps) {
-  console.log(gridCoordsList);
   return (
-    <div className={`${globals} ${styles}`}>
+    <div className={styles}>
       <MenuScreen>
         <Heading>Game Over</Heading>
         <Image alt="Skull" size={ImageSizeType.Large} src={skull} />
-        <Button onClick={onRestartButtonClick}>Restart</Button>
+        <Button
+          onClick={() => {
+            onRestartButtonClick();
+          }}
+        >
+          Restart
+        </Button>
       </MenuScreen>
     </div>
   );

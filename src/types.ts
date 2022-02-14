@@ -35,14 +35,26 @@ export interface HomeButtonClicked {
   type: "HOME_BUTTON_CLICKED";
 }
 
+export interface PlayerWalkedThroughDoor {
+  type: "PLAYER_WALKED_THROUGH_DOOR";
+}
+
 export type GameEventType =
   | StartButtonClicked
   | PlayerDied
   | PlayerGotTreasure
+  | PlayerWalkedThroughDoor
   | RestartButtonClicked
   | HomeButtonClicked;
 
 export type GameState = {
   context: null;
-  value: "home" | "playing" | "gameOver" | "gameComplete";
+  value:
+    | "home"
+    | "playing"
+    | "playing.level1"
+    | "playing.level2"
+    | "playing.level3"
+    | "gameOver"
+    | "gameComplete";
 };
