@@ -4,6 +4,7 @@ import { PlayerMovedType } from "./game-machine-types";
 
 export interface MonsterContextType {
   coords: CoordsType;
+  playerCoords?: CoordsType;
 }
 
 export type MonsterStateType = {
