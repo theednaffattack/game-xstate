@@ -45,6 +45,7 @@ export function GameOver({ onRestartButtonClick }: GameOverProps) {
         <Heading>Game Over</Heading>
         <Image alt="Skull" size={ImageSizeType.Large} src={skull} />
         <Button
+          autofocus
           onClick={() => {
             onRestartButtonClick();
           }}

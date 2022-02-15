@@ -46,7 +46,9 @@ export function HomeScreen({ onStartGameButtonClick }: HomeScreenProps) {
       <MenuScreen>
         <Heading>Pixel Thief</Heading>
         <Image alt="Thief" size={ImageSizeType.Large} src={thiefGif} />
-        <Button onClick={onStartGameButtonClick}>Start Game</Button>
+        <Button autofocus onClick={onStartGameButtonClick}>
+          Start Game
+        </Button>
       </MenuScreen>
     </div>
   );

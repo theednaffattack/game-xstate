@@ -20,7 +20,7 @@ const gridStyles = css`
 
 type GridProps = { children?: React.ReactNode };
 
-export function Layout({ children }: GridProps) {
+function GridLayout({ children }: GridProps) {
   return <section className={gridStyles}>{children}</section>;
 }
 
@@ -64,11 +64,11 @@ export function GridSquare({ x, y }: GridSquareProps) {
 
 export function Grid({ children }: GridProps) {
   return (
-    <Layout>
+    <GridLayout>
       {gridCoordsList.map(([x, y]) => (
         <GridSquare key={`${x}-${y}`} x={x} y={y}></GridSquare>
       ))}
       {children}
-    </Layout>
+    </GridLayout>
   );
 }

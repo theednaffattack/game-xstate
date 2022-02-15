@@ -12,14 +12,16 @@ const style = css`
 `;
 
 export function Button({
+  autofocus,
   children,
   onClick,
 }: {
+  autofocus?: boolean;
   children: React.ReactNode;
   onClick?: () => void;
 }) {
   return (
-    <button className={style} onClick={onClick}>
+    <button autoFocus={autofocus} className={style} onClick={onClick}>
       {children}
     </button>
   );

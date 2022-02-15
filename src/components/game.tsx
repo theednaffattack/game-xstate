@@ -12,6 +12,7 @@ import { GameOver } from "./game-over-screen";
 import { Grid } from "./grid";
 import { HomeScreen } from "./home-screen";
 import { LevelBackgroundImage } from "./level-background-image";
+import { Monster } from "./monster";
 import Player from "./player";
 import { Treasure } from "./treasure";
 
@@ -25,7 +26,7 @@ const lightText = css`
 
 export function Game({ fastForwardEvents }: Props) {
   const [state, send] = useMachine(gameMachine);
-  const { playerActor } = state.children;
+  const { playerActor, monsterActor } = state.children;
 
   useEffect(() => {
     if (fastForwardEvents) {
@@ -68,7 +69,10 @@ export function Game({ fastForwardEvents }: Props) {
         <>
           <LevelBackgroundImage src={levelTwoBackground} />
           <Grid />
-          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
+          <Grid>
+            {playerActor && <Player actor={playerActor} />}
+            {monsterActor && <Monster actor={monsterActor as any} />}
+          </Grid>
           <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
         </>
       );
