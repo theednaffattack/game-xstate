@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { assign, choose, sendParent } from "xstate/lib/actions";
+import { assign, choose, log, sendParent } from "xstate/lib/actions";
 import {
   PLAYER_STARTING_COORDS,
   PLAYER_STARTING_HEALTH,
@@ -31,6 +31,7 @@ export const playerMachine = createMachine<
         on: {
           ARROW_BUTTON_CLICKED: { actions: "onArrowButtonClicked" },
           RESET_PLAYER_COORDS: { actions: "resetCoords" },
+          ATTACK_PLAYER: { actions: log() },
         },
       },
       dead: {},

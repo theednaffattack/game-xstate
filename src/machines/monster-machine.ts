@@ -1,5 +1,6 @@
 import { createMachine } from "xstate";
-import { assign, log } from "xstate/lib/actions";
+import { assign, choose, sendParent } from "xstate/lib/actions";
+import { arrayEquals } from "../lib/util/array-equals";
 import { CoordsType } from "../types";
 import {
   MonsterContextType,
@@ -26,12 +27,18 @@ export const monsterMachine = createMachine<
     },
     on: {
       PLAYER_MOVED: {
-        actions: "storePlayerCoords",
+        actions: ["storePlayerCoords", "attemptAttack"],
       },
     },
     states: {
-      up: { after: { 2000: { target: "down", actions: "moveDown" } } },
-      down: { after: { 2000: { target: "up", actions: "moveUp" } } },
+      up: {
+        after: { 2000: { target: "down", actions: "moveDown" } },
+        entry: "attemptAttack",
+      },
+      down: {
+        after: { 2000: { target: "up", actions: "moveUp" } },
+        entry: "attemptAttack",
+      },
     },
   },
   {
@@ -45,6 +52,18 @@ export const monsterMachine = createMachine<
       storePlayerCoords: assign((_, event) => {
         return { playerCoords: event.coords };
       }),
+      attemptAttack: choose([
+        { cond: "isMonsterPlayerCoordsEqual", actions: "attack" },
+      ]),
+      attack: sendParent("ATTACK_PLAYER"),
+    },
+    guards: {
+      isMonsterPlayerCoordsEqual: (context) => {
+        if (context.playerCoords) {
+          return arrayEquals(context.playerCoords, context.coords);
+        }
+        return false;
+      },
     },
   }
 );
