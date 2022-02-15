@@ -13,6 +13,7 @@ import { Grid } from "./grid";
 import { HomeScreen } from "./home-screen";
 import { LevelBackgroundImage } from "./level-background-image";
 import Player from "./player";
+import { Treasure } from "./treasure";
 
 type Props = {
   fastForwardEvents?: GameEventType[];
@@ -58,17 +59,8 @@ export function Game({ fastForwardEvents }: Props) {
           <LevelBackgroundImage src={levelOneBackground} />
           <Grid />
           <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
-          <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
-            CURR: One, NEXT: Two
-          </Button>
           <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
         </>
-        // <LevelOneScreen
-        //   onSimulateWalkingButtonClick={() =>
-        //     send("PLAYER_WALKED_THROUGH_DOOR")
-        //   }
-        //   onPlayerDiedButtonClick={() => send("PLAYER_DIED")}
-        // />
       );
     }
     if (state.matches("playing.level2")) {
@@ -77,17 +69,8 @@ export function Game({ fastForwardEvents }: Props) {
           <LevelBackgroundImage src={levelTwoBackground} />
           <Grid />
           <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
-          <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
-            CURR: Two, NEXT: Three
-          </Button>
           <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
         </>
-        // <LevelTwoScreen
-        //   onSimulateWalkingButtonClick={() =>
-        //     send("PLAYER_WALKED_THROUGH_DOOR")
-        //   }
-        //   onPlayerDiedButtonClick={() => send("PLAYER_DIED")}
-        // />
       );
     }
     if (state.matches("playing.level3")) {
@@ -96,10 +79,10 @@ export function Game({ fastForwardEvents }: Props) {
           <LevelBackgroundImage src={levelThreeBackground} />
           <Grid />
 
-          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
-          <Button onClick={() => send("PLAYER_WALKED_THROUGH_DOOR")}>
-            Uhhhhhh
-          </Button>
+          <Grid>
+            {playerActor && <Player actor={playerActor} />}
+            <Treasure />
+          </Grid>
           <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
         </>
       );

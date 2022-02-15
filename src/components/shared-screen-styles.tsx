@@ -15,15 +15,21 @@ export const menuScreenStyles = css`
 
 export const largeImg = css`
   width: var(--large-img);
+  margin-left: auto;
+  margin-right: auto;
   object-fit: contain;
 `;
 
 export const mediumImg = css`
   width: var(--medium-img);
+  margin-left: auto;
+  margin-right: auto;
   object-fit: contain;
 `;
 
 export const smallImg = css`
   width: ${GRID_SQUARE_SIZE};
+  margin-left: auto;
+  margin-right: auto;
   object-fit: contain;
 `;
