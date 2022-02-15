@@ -21,7 +21,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
           PLAYER_DIED: "gameOver",
           PLAYER_GOT_TREASURE: "gameComplete",
           PLAYER_MOVED: {
-            actions: `onPlayerMoved`,
+            actions: `playerMoved`,
           },
         },
         initial: "level1",
@@ -32,6 +32,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
             },
           },
           level2: {
+            entry: `resetPlayerCoords`,
             on: {
               PLAYER_WALKED_THROUGH_DOOR: "level3",
             },
@@ -57,13 +58,14 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
   },
   {
     actions: {
-      onPlyerMoved: choose([
+      playerMoved: choose([
         {
           cond: `isPlayerAtDoor`,
           actions: `playerWalkedThroughDoor`,
         },
       ]),
       playerWalkedThroughDoor: send("PLAYER_WALKED_THROUGH_DOOR"),
+      resetPlayerCoords: send("RESET_PLAYER_COORDS", { to: `playerActor` }),
     },
     guards: {
       isPlayerAtDoor: (context, event) => {

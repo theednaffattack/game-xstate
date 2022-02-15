@@ -19,6 +19,10 @@ export type ArrowButtonClickedType = {
   direction: DirectionType;
 };
 
-export type PlayerEventType = ArrowButtonClickedType;
+export type PlayerEventType = ArrowButtonClickedType | ResetPlayerCoordsType;
 
 export type PlayerActorType = ActorRef<any, PlayerStateType>;
+
+export interface ResetPlayerCoordsType {
+  type: "RESET_PLAYER_COORDS";
+}

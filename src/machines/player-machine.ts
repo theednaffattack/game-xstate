@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { assign, choose, log, sendParent } from "xstate/lib/actions";
+import { assign, choose, sendParent } from "xstate/lib/actions";
 import { PLAYER_STARTING_COORDS } from "../lib/constants";
 import { getTargetCoords } from "../lib/util/get-target-coords";
 import { isCoordsOnGrid } from "../lib/util/is-coords-on-grid";
@@ -24,7 +24,10 @@ export const playerMachine = createMachine<
     initial: "alive",
     states: {
       alive: {
-        on: { ARROW_BUTTON_CLICKED: { actions: "onArrowButtonClicked" } },
+        on: {
+          ARROW_BUTTON_CLICKED: { actions: "onArrowButtonClicked" },
+          RESET_PLAYER_COORDS: { actions: "resetCoords" },
+        },
       },
       dead: {},
     },
@@ -47,10 +50,21 @@ export const playerMachine = createMachine<
         return event;
       }),
       move: assign((context: PlayerContextType, event: PlayerEventType) => {
+        if (event.type === "ARROW_BUTTON_CLICKED") {
+          const { coords } = context;
+          const { direction } = event;
+          const targetCoords = getTargetCoords({ coords, direction });
+          return { coords: targetCoords };
+        }
+        // if the arrow button wasn't clicked, don't move
         const { coords } = context;
-        const { direction } = event;
-        const targetCoords = getTargetCoords({ coords, direction });
-        return { coords: targetCoords };
+        return { coords };
+      }),
+      resetCoords: assign((coords, event) => {
+        if (event.type === "RESET_PLAYER_COORDS") {
+          return { coords: PLAYER_STARTING_COORDS as CoordsType };
+        }
+        return { coords: coords.coords };
       }),
     },
     guards: {
