@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import heart from "../game-assets/images/heart.png";
-import { Image } from "./image";
+import { Image, ImageSizeType } from "./image";
 
 interface HealthProps {
   health: number;
@@ -19,9 +19,15 @@ export function Health({ health }: HealthProps) {
       {Array(health)
         .fill(undefined)
         .map((_, healthIndex) => {
-          return <Image alt="health" key={healthIndex} src={heart} />;
+          return (
+            <Image
+              alt="health"
+              key={healthIndex}
+              src={heart}
+              size={ImageSizeType.Small}
+            />
+          );
         })}
-      Health
     </div>
   );
 }
