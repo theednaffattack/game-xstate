@@ -1,5 +1,10 @@
 import { ActorRef } from "xstate";
-import { PlayerContextType } from "./player-machine";
+import { CoordsType } from "../types";
+
+export interface PlayerContextType {
+  coords: CoordsType;
+  health: number;
+}
 
 // Player machine
 export enum DirectionType {
