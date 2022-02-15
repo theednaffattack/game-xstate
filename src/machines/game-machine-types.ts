@@ -1,6 +1,7 @@
 // Machine Types
 
 import { CoordsType } from "../types";
+import { AttackPlayerType } from "./monster-machine-types";
 
 export interface StartButtonClicked {
   type: "START_BUTTON_CLICKED";
@@ -33,7 +34,8 @@ export type GameEventType =
   | PlayerWalkedThroughDoor
   | RestartButtonClicked
   | HomeButtonClicked
-  | PlayerMovedType;
+  | PlayerMovedType
+  | AttackPlayerType;
 
 export type GameState = {
   context: null;

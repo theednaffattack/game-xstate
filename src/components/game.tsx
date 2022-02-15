@@ -71,7 +71,7 @@ export function Game({ fastForwardEvents }: Props) {
           <Grid />
           <Grid>
             {playerActor && <Player actor={playerActor} />}
-            {monsterActor && <Monster actor={monsterActor as any} />}
+            {monsterActor && <Monster actor={monsterActor} />}
           </Grid>
           <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
         </>

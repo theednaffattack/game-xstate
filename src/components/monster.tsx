@@ -11,8 +11,8 @@ type MonsterProps = {
 };
 
 export function Monster({ actor }: MonsterProps) {
-  const [state, send] = useActor(actor as any);
-  const { coords } = (state as any).context;
+  const [state, send] = useActor(actor);
+  const { coords } = state.context;
   const position = coordsToPosition(coords);
   return (
     <Layout left={position[0]} top={position[1]}>

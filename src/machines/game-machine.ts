@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { choose, log, send } from "xstate/lib/actions";
+import { choose, forwardTo, send } from "xstate/lib/actions";
 import { DOOR_COORDS, TREASURE_COORDS } from "../lib/constants";
 import { arrayEquals } from "../lib/util/array-equals";
 import { GameEventType, GameState } from "./game-machine-types";
@@ -40,6 +40,9 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
             entry: `resetPlayerCoords`,
             on: {
               PLAYER_WALKED_THROUGH_DOOR: "level3",
+              ATTACK_PLAYER: {
+                actions: "forwardToPlayer",
+              },
             },
           },
           level3: {
@@ -69,6 +72,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
           cond: `isPlayerAtDoor`,
           actions: `playerWalkedThroughDoor`,
         },
+        { cond: "isMonster", actions: "forwardToMonster" },
       ]),
       playerWalkedThroughDoor: send("PLAYER_WALKED_THROUGH_DOOR"),
       resetPlayerCoords: send("RESET_PLAYER_COORDS", { to: `playerActor` }),
@@ -76,6 +80,8 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         { cond: `isPlayerAtTreasure`, actions: `playerGotTreasure` },
       ]),
       playerGotTreasure: send("PLAYER_GOT_TREASURE"),
+      forwardToMonster: forwardTo("monsterActor"),
+      forwardToPlayer: forwardTo("playerActor"),
     },
     guards: {
       isPlayerAtDoor: (_, event) => {
@@ -93,6 +99,8 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         }
         return false;
       },
+      isMonster: (_, __, conditionMeta) =>
+        !!conditionMeta.state.children.monsterActor,
     },
     services: { playerMachine, monsterMachine },
   }
