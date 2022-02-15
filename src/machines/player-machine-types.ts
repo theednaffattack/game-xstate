@@ -17,7 +17,7 @@ export enum DirectionType {
 
 export interface PlayerStateType {
   context: PlayerContextType;
-  value: "alive" | "dead";
+  value: "alive" | "dead" | "determining";
 }
 
 export type ArrowButtonClickedType = {
