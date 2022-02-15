@@ -4,7 +4,7 @@ import { coordsToPosition } from "../lib/util/coords-to-position";
 import { MonsterActorType } from "../machines/monster-machine-types";
 import monster from "../game-assets/images/monster.gif";
 import { Image, ImageSizeType } from "./image";
-import { Layout } from "./Layout";
+import { Layout } from "./layout";
 
 type MonsterProps = {
   actor: MonsterActorType;
