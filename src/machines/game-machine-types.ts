@@ -1,5 +1,7 @@
 // Machine Types
 
+import { CoordsType } from "../types";
+
 export interface StartButtonClicked {
   type: "START_BUTTON_CLICKED";
 }
@@ -30,7 +32,8 @@ export type GameEventType =
   | PlayerGotTreasure
   | PlayerWalkedThroughDoor
   | RestartButtonClicked
-  | HomeButtonClicked;
+  | HomeButtonClicked
+  | PlayerMovedType;
 
 export type GameState = {
   context: null;
@@ -43,3 +46,8 @@ export type GameState = {
     | "gameOver"
     | "gameComplete";
 };
+
+export interface PlayerMovedType {
+  type: "PLAYER_MOVED";
+  coords: CoordsType;
+}
