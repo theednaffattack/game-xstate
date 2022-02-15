@@ -48,5 +48,6 @@ export type GameState = {
 };
 
 export interface PlayerMovedType {
+  type: "PLAYER_MOVED";
   coords: CoordsType;
 }
