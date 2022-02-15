@@ -1,6 +1,6 @@
 import { createMachine } from "xstate";
 import { choose, log, send } from "xstate/lib/actions";
-import { DOOR_COORDS } from "../lib/constants";
+import { DOOR_COORDS, TREASURE_COORDS } from "../lib/constants";
 import { arrayEquals } from "../lib/util/array-equals";
 import { GameEventType, GameState } from "./game-machine-types";
 import { playerMachine } from "./player-machine";
@@ -38,8 +38,9 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
             },
           },
           level3: {
+            entry: `resetPlayerCoords`,
             on: {
-              PLAYER_GOT_TREASURE: "",
+              PLAYER_MOVED: { actions: "onPlayerMovedFinalLevel" },
             },
           },
         },
@@ -66,14 +67,26 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
       ]),
       playerWalkedThroughDoor: send("PLAYER_WALKED_THROUGH_DOOR"),
       resetPlayerCoords: send("RESET_PLAYER_COORDS", { to: `playerActor` }),
+      onPlayerMovedFinalLevel: choose([
+        { cond: `isPlayerAtTreasure`, actions: `playerGotTreasure` },
+      ]),
+      playerGotTreasure: send("PLAYER_GOT_TREASURE"),
     },
     guards: {
-      isPlayerAtDoor: (context, event) => {
+      isPlayerAtDoor: (_, event) => {
         if (event.type === "PLAYER_MOVED") {
           const { coords } = event;
           return arrayEquals(coords, DOOR_COORDS);
         }
 
+        return false;
+      },
+      isPlayerAtTreasure: (_, event) => {
+        if (event.type === "PLAYER_MOVED") {
+          const { coords } = event;
+          console.log("COMPARISON", arrayEquals(coords, TREASURE_COORDS));
+          return arrayEquals(coords, TREASURE_COORDS);
+        }
         return false;
       },
     },
