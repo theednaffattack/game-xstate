@@ -75,8 +75,5 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         return false;
       },
     },
-    services: {
-      playerMachine,
-    },
   }
 );
