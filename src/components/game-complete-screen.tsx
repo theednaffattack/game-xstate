@@ -28,7 +28,9 @@ export function GameCompleteScreen({ onGoHomeButtonClick }: GameOverProps) {
       <MenuScreen>
         <Heading>Quest Complete</Heading>
         <Image alt="Treasure chest" size={ImageSizeType.Large} src={treasure} />
-        <Button onClick={onGoHomeButtonClick}>Restart</Button>
+        <Button autofocus onClick={onGoHomeButtonClick}>
+          Restart
+        </Button>
       </MenuScreen>
     </div>
   );
