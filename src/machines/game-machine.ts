@@ -22,7 +22,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
           PLAYER_DIED: "gameOver",
           PLAYER_GOT_TREASURE: "gameComplete",
           PLAYER_MOVED: {
-            actions: `playerMoved`,
+            actions: `onPlayerMoved`,
           },
         },
         initial: "level1",
@@ -64,7 +64,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
   },
   {
     actions: {
-      playerMoved: choose([
+      onPlayerMoved: choose([
         {
           cond: `isPlayerAtDoor`,
           actions: `playerWalkedThroughDoor`,
