@@ -69,6 +69,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
           cond: `isPlayerAtDoor`,
           actions: `playerWalkedThroughDoor`,
         },
+        { cond: "isMonster", actions: "forwardToMonster" },
       ]),
       playerWalkedThroughDoor: send("PLAYER_WALKED_THROUGH_DOOR"),
       resetPlayerCoords: send("RESET_PLAYER_COORDS", { to: `playerActor` }),
