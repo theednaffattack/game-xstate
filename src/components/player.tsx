@@ -1,6 +1,6 @@
 import { css } from "@linaria/core";
 import { useActor } from "@xstate/react";
-import React, { CSSProperties } from "react";
+import React from "react";
 import thief from "../game-assets/images/thief.gif";
 import { usePlayerControls } from "../hooks/use-player-controls";
 import { coordsToPosition } from "../lib/util/coords-to-position";
@@ -10,12 +10,13 @@ import {
 } from "../machines/player-machine-types";
 import { Health } from "./health";
 import { Image, ImageSizeType } from "./image";
+import { Layout } from "./Layout";
 
 interface PlayerProps {
   actor: PlayerActorType;
 }
 
-const abPosition = css`
+export const abPosition = css`
   position: absolute;
 `;
 
@@ -27,24 +28,6 @@ const healthPosition = css`
 
 function HealthLayout({ children }: { children: React.ReactNode }) {
   return <div className={healthPosition}>{children}</div>;
-}
-
-function Layout({
-  children,
-  top,
-  left,
-}: {
-  children: React.ReactNode;
-  top?: CSSProperties["top"];
-  bottom?: CSSProperties["bottom"];
-  left?: CSSProperties["left"];
-  right?: CSSProperties["right"];
-}) {
-  return (
-    <div className={abPosition} style={{ top, left }}>
-      {children}
-    </div>
-  );
 }
 
 function Player({ actor }: PlayerProps) {
