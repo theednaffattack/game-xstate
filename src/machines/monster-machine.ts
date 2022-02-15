@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { assign } from "xstate/lib/actions";
+import { assign, log } from "xstate/lib/actions";
 import { CoordsType } from "../types";
 import {
   MonsterContextType,
@@ -22,6 +22,11 @@ export const monsterMachine = createMachine<
     initial: "up",
     context: {
       coords: coordsList[0],
+    },
+    on: {
+      PLAYER_MOVED: {
+        actions: log(),
+      },
     },
     states: {
       up: { after: { 2000: { target: "down", actions: "moveDown" } } },
