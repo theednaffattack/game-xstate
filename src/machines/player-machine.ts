@@ -31,10 +31,11 @@ export const playerMachine = createMachine<
         on: {
           ARROW_BUTTON_CLICKED: { actions: "onArrowButtonClicked" },
           RESET_PLAYER_COORDS: { actions: "resetCoords" },
-          ATTACK_PLAYER: { actions: log() },
+          ATTACK_PLAYER: { actions: "reduceHealth" },
         },
       },
       dead: {},
+      determining: {},
     },
   },
   {
@@ -71,6 +72,9 @@ export const playerMachine = createMachine<
         }
         return { coords: coords.coords };
       }),
+      reduceHealth: assign((context, event) => ({
+        health: context.health - 1,
+      })),
     },
     guards: {
       isSquareAvailable: (
