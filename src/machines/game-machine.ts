@@ -3,6 +3,7 @@ import { choose, log, send } from "xstate/lib/actions";
 import { DOOR_COORDS, TREASURE_COORDS } from "../lib/constants";
 import { arrayEquals } from "../lib/util/array-equals";
 import { GameEventType, GameState } from "./game-machine-types";
+import { monsterMachine } from "./monster-machine";
 import { playerMachine } from "./player-machine";
 
 export const gameMachine = createMachine<null, GameEventType, GameState>(
@@ -32,6 +33,10 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
             },
           },
           level2: {
+            invoke: {
+              id: `monsterActor`,
+              src: `monsterMachine`,
+            },
             entry: `resetPlayerCoords`,
             on: {
               PLAYER_WALKED_THROUGH_DOOR: "level3",
@@ -89,5 +94,6 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         return false;
       },
     },
+    services: { playerMachine, monsterMachine },
   }
 );
