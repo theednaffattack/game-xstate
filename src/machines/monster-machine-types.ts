@@ -1,5 +1,6 @@
-import { Actor } from "xstate";
+import { Actor, ActorRef } from "xstate";
 import { CoordsType } from "../types";
+import { PlayerMovedType } from "./game-machine-types";
 
 export interface MonsterContextType {
   coords: CoordsType;
@@ -10,4 +11,6 @@ export type MonsterStateType = {
   value: "up" | "down";
 };
 
-export type MonsterActorType = Actor<MonsterContextType>;
+export type MonsterEventType = PlayerMovedType;
+
+export type MonsterActorType = ActorRef<MonsterEventType, MonsterStateType>;

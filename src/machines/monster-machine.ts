@@ -1,7 +1,11 @@
 import { createMachine } from "xstate";
 import { assign } from "xstate/lib/actions";
 import { CoordsType } from "../types";
-import { MonsterContextType, MonsterStateType } from "./monster-machine-types";
+import {
+  MonsterContextType,
+  MonsterEventType,
+  MonsterStateType,
+} from "./monster-machine-types";
 
 const coordsList: CoordsType[] = [
   [8, 1],
@@ -10,7 +14,7 @@ const coordsList: CoordsType[] = [
 
 export const monsterMachine = createMachine<
   MonsterContextType,
-  any,
+  MonsterEventType,
   MonsterStateType
 >(
   {
