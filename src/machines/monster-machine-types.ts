@@ -15,3 +15,7 @@ export type MonsterStateType = {
 export type MonsterEventType = PlayerMovedType;
 
 export type MonsterActorType = ActorRef<MonsterEventType, MonsterStateType>;
+
+export interface AttackPlayerType {
+  type: "ATTACK_PLAYER";
+}
