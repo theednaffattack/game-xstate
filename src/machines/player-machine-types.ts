@@ -1,5 +1,6 @@
 import { ActorRef } from "xstate";
 import { CoordsType } from "../types";
+import { AttackPlayerType } from "./monster-machine-types";
 
 export interface PlayerContextType {
   coords: CoordsType;
@@ -24,7 +25,10 @@ export type ArrowButtonClickedType = {
   direction: DirectionType;
 };
 
-export type PlayerEventType = ArrowButtonClickedType | ResetPlayerCoordsType;
+export type PlayerEventType =
+  | ArrowButtonClickedType
+  | ResetPlayerCoordsType
+  | AttackPlayerType;
 
 export type PlayerActorType = ActorRef<any, PlayerStateType>;
 
