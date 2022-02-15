@@ -1,5 +1,5 @@
 import { createMachine } from "xstate";
-import { choose, log, send } from "xstate/lib/actions";
+import { choose, forwardTo, send } from "xstate/lib/actions";
 import { DOOR_COORDS, TREASURE_COORDS } from "../lib/constants";
 import { arrayEquals } from "../lib/util/array-equals";
 import { GameEventType, GameState } from "./game-machine-types";
@@ -77,6 +77,7 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         { cond: `isPlayerAtTreasure`, actions: `playerGotTreasure` },
       ]),
       playerGotTreasure: send("PLAYER_GOT_TREASURE"),
+      forwardToMonster: forwardTo("monsterActor"),
     },
     guards: {
       isPlayerAtDoor: (_, event) => {
