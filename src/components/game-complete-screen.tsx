@@ -18,21 +18,6 @@ const styles = css`
   align-content: center;
 `;
 
-export const large = css`
-  width: var(--large-img);
-  object-fit: contain;
-`;
-
-export const medium = css`
-  width: var(--medium-img);
-  object-fit: contain;
-`;
-
-export const small = css`
-  width: var(--small-img);
-  object-fit: contain;
-`;
-
 interface GameOverProps {
   onGoHomeButtonClick: () => void;
 }
