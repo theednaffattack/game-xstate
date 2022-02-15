@@ -22,10 +22,11 @@ export const monsterMachine = createMachine<
     initial: "up",
     context: {
       coords: coordsList[0],
+      playerCoords: undefined,
     },
     on: {
       PLAYER_MOVED: {
-        actions: log(),
+        actions: "storePlayerCoords",
       },
     },
     states: {
@@ -40,6 +41,9 @@ export const monsterMachine = createMachine<
       }),
       moveDown: assign(() => {
         return { coords: coordsList[1] };
+      }),
+      storePlayerCoords: assign((_, event) => {
+        return { playerCoords: event.coords };
       }),
     },
   }
