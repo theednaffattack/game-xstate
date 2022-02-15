@@ -94,6 +94,8 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
         }
         return false;
       },
+      isMonster: (_, __, conditionMeta) =>
+        !!conditionMeta.state.children.monsterActor,
     },
     services: { playerMachine, monsterMachine },
   }
