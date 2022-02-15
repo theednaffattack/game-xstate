@@ -84,7 +84,6 @@ export const gameMachine = createMachine<null, GameEventType, GameState>(
       isPlayerAtTreasure: (_, event) => {
         if (event.type === "PLAYER_MOVED") {
           const { coords } = event;
-          console.log("COMPARISON", arrayEquals(coords, TREASURE_COORDS));
           return arrayEquals(coords, TREASURE_COORDS);
         }
         return false;
