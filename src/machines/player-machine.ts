@@ -31,11 +31,21 @@ export const playerMachine = createMachine<
         on: {
           ARROW_BUTTON_CLICKED: { actions: "onArrowButtonClicked" },
           RESET_PLAYER_COORDS: { actions: "resetCoords" },
-          ATTACK_PLAYER: { actions: "reduceHealth" },
+          ATTACK_PLAYER: { actions: "reduceHealth", target: "determining" },
         },
       },
-      dead: {},
-      determining: {},
+      dead: {
+        entry: "broadcastPlayerDied",
+      },
+      determining: {
+        always: [
+          {
+            cond: "isHealthZero",
+            target: "dead",
+          },
+          { target: "alive" },
+        ],
+      },
     },
   },
   {
@@ -75,6 +85,7 @@ export const playerMachine = createMachine<
       reduceHealth: assign((context, event) => ({
         health: context.health - 1,
       })),
+      broadcastPlayerDied: sendParent("PLAYER_DIED"),
     },
     guards: {
       isSquareAvailable: (
@@ -90,6 +101,9 @@ export const playerMachine = createMachine<
         }
         // ignore all other events
         return false;
+      },
+      isHealthZero: (context) => {
+        return context.health === 0;
       },
     },
   }
