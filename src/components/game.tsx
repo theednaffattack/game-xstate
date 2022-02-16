@@ -14,6 +14,7 @@ import { HomeScreen } from "./home-screen";
 import { LevelBackgroundImage } from "./level-background-image";
 import { Monster } from "./monster";
 import Player from "./player";
+import { ScreenTransition } from "./screen-transition";
 import { Treasure } from "./treasure";
 
 type Props = {
@@ -36,70 +37,80 @@ export function Game({ fastForwardEvents }: Props) {
     }
   }, [fastForwardEvents, send]);
 
-  if (state.matches("home")) {
-    return (
-      <HomeScreen onStartGameButtonClick={() => send("START_BUTTON_CLICKED")} />
-    );
-  }
-  if (state.matches("gameComplete")) {
-    return (
-      <GameCompleteScreen
-        onGoHomeButtonClick={() => send("HOME_BUTTON_CLICKED")}
-      />
-    );
-  }
-  if (state.matches("gameOver")) {
-    return (
-      <GameOver onRestartButtonClick={() => send("RESTART_BUTTON_CLICKED")} />
-    );
-  }
-  if (state.matches("playing")) {
-    if (state.matches("playing.level1")) {
+  function Screen() {
+    if (state.matches("home")) {
       return (
-        <>
-          <LevelBackgroundImage src={levelOneBackground} />
-          <Grid />
-          <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
-          <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
-        </>
+        <HomeScreen
+          onStartGameButtonClick={() => send("START_BUTTON_CLICKED")}
+        />
       );
     }
-    if (state.matches("playing.level2")) {
+    if (state.matches("gameComplete")) {
       return (
-        <>
-          <LevelBackgroundImage src={levelTwoBackground} />
-          <Grid />
-          <Grid>
-            {playerActor && <Player actor={playerActor} />}
-            {monsterActor && <Monster actor={monsterActor} />}
-          </Grid>
-          <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
-        </>
+        <GameCompleteScreen
+          onGoHomeButtonClick={() => send("HOME_BUTTON_CLICKED")}
+        />
       );
     }
-    if (state.matches("playing.level3")) {
+    if (state.matches("gameOver")) {
       return (
-        <>
-          <LevelBackgroundImage src={levelThreeBackground} />
-          <Grid />
+        <GameOver onRestartButtonClick={() => send("RESTART_BUTTON_CLICKED")} />
+      );
+    }
+    if (state.matches("playing")) {
+      if (state.matches("playing.level1")) {
+        return (
+          <>
+            <LevelBackgroundImage src={levelOneBackground} />
+            <Grid />
+            <Grid>{playerActor && <Player actor={playerActor} />}</Grid>
+            <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
+          </>
+        );
+      }
+      if (state.matches("playing.level2")) {
+        return (
+          <>
+            <LevelBackgroundImage src={levelTwoBackground} />
+            <Grid />
+            <Grid>
+              {playerActor && <Player actor={playerActor} />}
+              {monsterActor && <Monster actor={monsterActor} />}
+            </Grid>
+            <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
+          </>
+        );
+      }
+      if (state.matches("playing.level3")) {
+        return (
+          <>
+            <LevelBackgroundImage src={levelThreeBackground} />
+            <Grid />
 
-          <Grid>
-            {playerActor && <Player actor={playerActor} />}
-            <Treasure />
-          </Grid>
-          <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
+            <Grid>
+              {playerActor && <Player actor={playerActor} />}
+              <Treasure />
+            </Grid>
+            <Button onClick={() => send("PLAYER_DIED")}>PLAYER DIED</Button>
+          </>
+        );
+      }
+      return (
+        <>
+          <p className={lightText}>state is playing</p>
+          <Button onClick={() => send("PLAYER_DIED")}>PLAYER_DIED</Button>
+          <Button onClick={() => send("PLAYER_GOT_TREASURE")}>
+            PLAYER_GOT_TREASURE
+          </Button>
         </>
       );
     }
-    return (
-      <>
-        <p className={lightText}>state is playing</p>
-        <Button onClick={() => send("PLAYER_DIED")}>PLAYER_DIED</Button>
-        <Button onClick={() => send("PLAYER_GOT_TREASURE")}>
-          PLAYER_GOT_TREASURE
-        </Button>
-      </>
-    );
+    throw new Error(`Unknown game state: ${JSON.stringify(state, null, 2)}`);
   }
-  throw new Error(`Unknown game state: ${JSON.stringify(state, null, 2)}`);
+
+  return (
+    <ScreenTransition key={JSON.stringify(state.value)}>
+      <Screen />
+    </ScreenTransition>
+  );
 }

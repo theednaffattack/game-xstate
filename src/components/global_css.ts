@@ -6,6 +6,10 @@ export const globals = css`
       box-sizing: border-box;
     }
 
+    body {
+      background-color: var(---black);
+    }
+
     *,
     *:before,
     *:after {
